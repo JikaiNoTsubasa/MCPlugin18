@@ -14,3 +14,6 @@ commands:
   detector:
     description: Detecte les metaux
     usage: /detector
+  inv:
+    description: Permet de creer des inventaires
+    usage: /inv id|list|share
