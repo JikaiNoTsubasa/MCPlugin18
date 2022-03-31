@@ -77,11 +77,11 @@ import fr.triedge.minecraft.plugin.v2.warp.WarpManager;
  * @author steph
  *
  */
-public class MCPluginV2 extends JavaPlugin implements Listener{
+public class MCPlugin18 extends JavaPlugin implements Listener{
 
-	public static final String WARP_CONFIG_FILE								= "plugins/MCPluginV2/warp.xml";
-	public static final String SPELL_CONFIG_FILE							= "plugins/MCPluginV2/magic.xml";
-	public static final String INV_CONFIG_FILE								= "plugins/MCPluginV2/inventory.xml";
+	public static final String WARP_CONFIG_FILE								= "plugins/MCPlugin18/warp.xml";
+	public static final String SPELL_CONFIG_FILE							= "plugins/MCPlugin18/magic.xml";
+	public static final String INV_CONFIG_FILE								= "plugins/MCPlugin18/inventory.xml";
 	public static final String METRIC_INFO									= "metrics.info";
 	public static final String VERSION										= "20220331.0";
 	public static final String VERSION_SUB									= "Raise of Lava";

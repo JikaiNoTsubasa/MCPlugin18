@@ -22,16 +22,16 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.util.Vector;
 
-import fr.triedge.minecraft.plugin.v2.MCPluginV2;
+import fr.triedge.minecraft.plugin.v2.MCPlugin18;
 import fr.triedge.minecraft.plugin.v2.exceptions.MCLoadingException;
 import fr.triedge.minecraft.plugin.v2.utils.Utils;
 
 public class WarpManager implements Listener{
 
-	private MCPluginV2 plugin;
+	private MCPlugin18 plugin;
 	private WarpList warpList = new WarpList();
 
-	public WarpManager(MCPluginV2 plugin) {
+	public WarpManager(MCPlugin18 plugin) {
 		super();
 		this.setPlugin(plugin);
 	}
@@ -428,11 +428,11 @@ public class WarpManager implements Listener{
 		this.warpList = warpList;
 	}
 
-	public MCPluginV2 getPlugin() {
+	public MCPlugin18 getPlugin() {
 		return plugin;
 	}
 
-	public void setPlugin(MCPluginV2 plugin) {
+	public void setPlugin(MCPlugin18 plugin) {
 		this.plugin = plugin;
 	}
 }

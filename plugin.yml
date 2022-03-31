@@ -1,0 +1,16 @@
+name: MCPlugin18
+main: fr.triedge.minecraft.plugin.v2.MCPlugin18
+version: 1.18
+author: Jikai
+api-version: 1.18
+
+commands:
+  warp:
+    description: Manipule les teleporteurs
+    usage: /warp create|remove|setgroup|removegroup TP_NAME [GROUP_NAME]
+  warpgroup:
+    description: Manipule les groupes
+    usage: /warpgroup create|delete|add|remove TP_NAME [PLAYER_NAME]
+  detector:
+    description: Detecte les metaux
+    usage: /detector

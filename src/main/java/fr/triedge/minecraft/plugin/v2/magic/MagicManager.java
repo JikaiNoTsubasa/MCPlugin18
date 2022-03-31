@@ -18,7 +18,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.metadata.MetadataValue;
 
-import fr.triedge.minecraft.plugin.v2.MCPluginV2;
+import fr.triedge.minecraft.plugin.v2.MCPlugin18;
 import fr.triedge.minecraft.plugin.v2.custom.Custom;
 import fr.triedge.minecraft.plugin.v2.exceptions.MCLoadingException;
 import fr.triedge.minecraft.plugin.v2.utils.Utils;
@@ -26,10 +26,10 @@ import fr.triedge.minecraft.plugin.v2.utils.Utils;
 
 public class MagicManager implements Listener{
 	
-	private MCPluginV2 plugin;
+	private MCPlugin18 plugin;
 	private SpellDataList spellDataList;
 	
-	public MagicManager(MCPluginV2 plugin) {
+	public MagicManager(MCPlugin18 plugin) {
 		setPlugin(plugin);
 	}
 	
@@ -133,11 +133,11 @@ public class MagicManager implements Listener{
 	}
 	
 
-	public MCPluginV2 getPlugin() {
+	public MCPlugin18 getPlugin() {
 		return plugin;
 	}
 
-	public void setPlugin(MCPluginV2 plugin) {
+	public void setPlugin(MCPlugin18 plugin) {
 		this.plugin = plugin;
 	}
 
