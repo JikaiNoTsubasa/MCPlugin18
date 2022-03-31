@@ -23,6 +23,15 @@ public class Utils {
 	public static final String SYSLOG					= "SYSTEM: ";
 	public static final String INFO						= "INFO: ";
 	
+	public static boolean createFileIfNotExists(File file) throws IOException {
+		file.getParentFile().mkdirs();
+		return file.createNewFile(); // if file already exists will do nothing
+	}
+	
+	public static boolean createFileIfNotExists(String fileName) throws IOException {
+		return createFileIfNotExists(new File(fileName));
+	}
+	
 	public static void log(JavaPlugin plugin, String message) {
 		plugin.getLogger().log(Level.INFO, INFO+message);
 	}

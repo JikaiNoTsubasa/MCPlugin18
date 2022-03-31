@@ -1,5 +1,6 @@
 package fr.triedge.minecraft.plugin.v2;
 
+import java.io.IOException;
 import java.util.logging.Level;
 
 import org.bukkit.ChatColor;
@@ -20,6 +21,7 @@ import fr.triedge.minecraft.plugin.v2.exceptions.MCLoadingException;
 import fr.triedge.minecraft.plugin.v2.inventory.InventoryManager;
 import fr.triedge.minecraft.plugin.v2.magic.MagicManager;
 import fr.triedge.minecraft.plugin.v2.task.SaveTask;
+import fr.triedge.minecraft.plugin.v2.utils.Utils;
 import fr.triedge.minecraft.plugin.v2.warp.WarpManager;
 
 
@@ -80,9 +82,9 @@ import fr.triedge.minecraft.plugin.v2.warp.WarpManager;
  */
 public class MCPlugin18 extends JavaPlugin implements Listener{
 
-	public static final String WARP_CONFIG_FILE								= "plugins/MCPlugin18/warp.xml";
-	public static final String SPELL_CONFIG_FILE							= "plugins/MCPlugin18/magic.xml";
-	public static final String INV_CONFIG_FILE								= "plugins/MCPlugin18/inventory.xml";
+	public static final String WARP_CONFIG_FILE								= "plugins/MCPlugin18/warp.json";
+	public static final String SPELL_CONFIG_FILE							= "plugins/MCPlugin18/magic.json";
+	public static final String INV_CONFIG_FILE								= "plugins/MCPlugin18/inventory.json";
 	public static final String METRIC_INFO									= "metrics.info";
 	public static final String VERSION										= "20220331.0";
 	public static final String VERSION_SUB									= "Raise of Lava";
@@ -206,8 +208,9 @@ public class MCPlugin18 extends JavaPlugin implements Listener{
 		getLogger().log(Level.INFO,"Initializing warps configuration");
 		setWarpManager(new WarpManager(this));
 		try {
+			Utils.createFileIfNotExists(WARP_CONFIG_FILE);
 			getWarpManager().loadWarps(WARP_CONFIG_FILE);
-		} catch (MCLoadingException e) {
+		} catch (MCLoadingException | IOException e) {
 			getLogger().log(Level.SEVERE, "Cannot load config file: "+WARP_CONFIG_FILE, e);
 		}
 		getLogger().log(Level.INFO,"Initialization of warps completed");
@@ -223,8 +226,9 @@ public class MCPlugin18 extends JavaPlugin implements Listener{
 		getLogger().log(Level.INFO,"Initializing magic configuration");
 		setMagicManager(new MagicManager(this));
 		try {
+			Utils.createFileIfNotExists(SPELL_CONFIG_FILE);
 			getMagicManager().loadMagic(SPELL_CONFIG_FILE);
-		} catch (MCLoadingException e) {
+		} catch (MCLoadingException | IOException e) {
 			getLogger().log(Level.SEVERE, "Cannot load config file: "+SPELL_CONFIG_FILE, e);
 		}
 		getLogger().log(Level.INFO,"Initialization of magic completed");
@@ -234,8 +238,9 @@ public class MCPlugin18 extends JavaPlugin implements Listener{
 		getLogger().log(Level.INFO,"Initializing inventory configuration");
 		setInventoryManager(new InventoryManager(this));
 		try {
+			Utils.createFileIfNotExists(INV_CONFIG_FILE);
 			getInventoryManager().loadInventories(INV_CONFIG_FILE);
-		} catch (MCLoadingException e) {
+		} catch (MCLoadingException | IOException e) {
 			getLogger().log(Level.SEVERE, "Cannot load config file: "+INV_CONFIG_FILE, e);
 		}
 		getLogger().log(Level.INFO,"Initialization of inventory completed");
