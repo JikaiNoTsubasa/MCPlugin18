@@ -2,12 +2,6 @@ package fr.triedge.minecraft.plugin.v2.warp;
 
 import java.util.ArrayList;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement(name="WarpGroup")
 public class WarpGroup {
 
 	private String name;
@@ -24,7 +18,6 @@ public class WarpGroup {
 		return name;
 	}
 
-	@XmlAttribute(name="Name")
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -33,8 +26,6 @@ public class WarpGroup {
 		return allowed;
 	}
 
-	@XmlElementWrapper(name="AllowedList")
-    @XmlElement(name="Allowed")
 	public void setAllowed(ArrayList<String> allowed) {
 		this.allowed = allowed;
 	}

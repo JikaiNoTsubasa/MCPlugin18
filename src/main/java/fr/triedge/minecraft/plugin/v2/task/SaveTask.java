@@ -2,8 +2,6 @@ package fr.triedge.minecraft.plugin.v2.task;
 
 import java.util.logging.Level;
 
-import javax.xml.bind.JAXBException;
-
 import fr.triedge.minecraft.plugin.v2.MCPlugin18;
 
 public class SaveTask implements Runnable{
@@ -24,7 +22,7 @@ public class SaveTask implements Runnable{
 			this.plugin.getLogger().log(Level.INFO,"[SCHEDULED TASK] Configuration Magic saved");
 			this.plugin.getInventoryManager().save(MCPlugin18.INV_CONFIG_FILE);
 			this.plugin.getLogger().log(Level.INFO,"[SCHEDULED TASK] Configuration Inventories saved");
-		} catch (JAXBException e) {
+		} catch (Exception e) {
 			this.plugin.getLogger().log(Level.SEVERE,"Cannot save configuration",e);
 		}
 	}

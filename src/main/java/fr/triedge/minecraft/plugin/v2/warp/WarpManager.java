@@ -1,10 +1,9 @@
 package fr.triedge.minecraft.plugin.v2.warp;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.logging.Level;
-
-import javax.xml.bind.JAXBException;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -21,6 +20,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.util.Vector;
+
+import com.google.gson.JsonIOException;
 
 import fr.triedge.minecraft.plugin.v2.MCPlugin18;
 import fr.triedge.minecraft.plugin.v2.exceptions.MCLoadingException;
@@ -392,9 +393,9 @@ public class WarpManager implements Listener{
 		player.sendMessage(tmp.toString());
 	}
 
-	public void save(String path) throws JAXBException {
+	public void save(String path) throws JsonIOException, IOException {
 		getPlugin().getLogger().log(Level.INFO,"Storing warps into "+path+"...");
-		Utils.storeXml(getWarpList(), new File(path));
+		Utils.storeJson(getWarpList(), new File(path));
 		getPlugin().getLogger().log(Level.INFO,"Warps stored");
 	}
 
@@ -403,14 +404,14 @@ public class WarpManager implements Listener{
 		File file = new File(path);
 		if (file.exists()) {
 			try {
-				WarpList list = Utils.loadXml(WarpList.class, file);
+				WarpList list = Utils.loadJson(WarpList.class, file);
 				if (list == null) {
 					getPlugin().getLogger().log(Level.SEVERE, "Warp loaded list is null!");
 					throw new MCLoadingException("Warp loaded list is null");
 				}
 				getPlugin().getLogger().log(Level.INFO,"Warps loaded");
 				setWarpList(list);
-			} catch (JAXBException e) {
+			} catch (Exception e) {
 				getPlugin().getLogger().log(Level.SEVERE, "Cannot load config file: "+file.getAbsolutePath(), e);
 			}
 

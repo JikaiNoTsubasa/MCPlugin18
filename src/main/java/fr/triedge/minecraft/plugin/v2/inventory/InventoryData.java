@@ -2,12 +2,7 @@ package fr.triedge.minecraft.plugin.v2.inventory;
 
 import java.util.ArrayList;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name="Inventory")
 public class InventoryData {
 
 	private String playerName;
@@ -25,7 +20,6 @@ public class InventoryData {
 		return playerName;
 	}
 
-	@XmlAttribute(name="Player")
 	public void setPlayerName(String playerName) {
 		this.playerName = playerName;
 	}
@@ -34,7 +28,6 @@ public class InventoryData {
 		return id;
 	}
 
-	@XmlAttribute(name="ID")
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -43,8 +36,6 @@ public class InventoryData {
 		return items;
 	}
 
-	@XmlElementWrapper(name="ItemList")
-    @XmlElement(name="Item")
 	public void setItems(ArrayList<InventoryItem> items) {
 		this.items = items;
 	}

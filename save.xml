@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Warp Name="Name1">
+    <Group>none</Group>
+    <LocationX>0</LocationX>
+    <LocationY>0</LocationY>
+    <LocationZ>0</LocationZ>
+    <Pitch>0.0</Pitch>
+    <World>World</World>
+    <Yaw>0.0</Yaw>
+</Warp>

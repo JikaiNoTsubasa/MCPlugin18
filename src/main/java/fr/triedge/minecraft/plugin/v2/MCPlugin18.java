@@ -22,6 +22,7 @@ import fr.triedge.minecraft.plugin.v2.magic.MagicManager;
 import fr.triedge.minecraft.plugin.v2.task.SaveTask;
 import fr.triedge.minecraft.plugin.v2.warp.WarpManager;
 
+
 /**
  * Plugin features:
  * [x] v1.0 Build teleports [TEST OK]

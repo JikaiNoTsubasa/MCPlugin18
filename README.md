@@ -18,3 +18,5 @@ Minecraft plugin for 1.18.2 and jdk17
  * /inv 1 - Permet d'ouvrir l'inventaire 1, vous pouvez mettre n'importe quel nombre
  * /inv list - Permet de lister les inventaires personnels deja créés
  * /inv share - Permet d'ouvrir l'inventaire partagé avec les autres joueurs
+ 
+ Run as maven build, goal: package

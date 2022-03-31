@@ -2,11 +2,6 @@ package fr.triedge.minecraft.plugin.v2.magic;
 
 import java.util.ArrayList;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement(name="RootDataList")
 public class SpellDataList {
 
 	private ArrayList<SpellData> spellData = new ArrayList<>();
@@ -18,8 +13,6 @@ public class SpellDataList {
 		return spellData;
 	}
 
-	@XmlElementWrapper(name="SpellDataList")
-    @XmlElement(name="SpellData")
 	public void setSpellData(ArrayList<SpellData> spellData) {
 		this.spellData = spellData;
 	}

@@ -1,10 +1,9 @@
 package fr.triedge.minecraft.plugin.v2.magic;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
-
-import javax.xml.bind.JAXBException;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -17,6 +16,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.metadata.MetadataValue;
+
+import com.google.gson.JsonIOException;
 
 import fr.triedge.minecraft.plugin.v2.MCPlugin18;
 import fr.triedge.minecraft.plugin.v2.custom.Custom;
@@ -109,14 +110,14 @@ public class MagicManager implements Listener{
 		File file = new File(path);
 		if (file.exists()) {
 			try {
-				SpellDataList list = Utils.loadXml(SpellDataList.class, file);
+				SpellDataList list = Utils.loadJson(SpellDataList.class, file);
 				if (list == null) {
 					getPlugin().getLogger().log(Level.SEVERE, "SpellData loaded list is null!");
 					throw new MCLoadingException("SpellData loaded list is null");
 				}
 				getPlugin().getLogger().log(Level.INFO,"Warps loaded");
 				setSpellDataList(list);
-			} catch (JAXBException e) {
+			} catch (Exception e) {
 				getPlugin().getLogger().log(Level.SEVERE, "Cannot load config file: "+file.getAbsolutePath(), e);
 			}
 		}else {
@@ -126,9 +127,9 @@ public class MagicManager implements Listener{
 		
 	}
 	
-	public void save(String path) throws JAXBException {
+	public void save(String path) throws JsonIOException, IOException {
 		getPlugin().getLogger().log(Level.INFO,"Storing spelldata into "+path+"...");
-		Utils.storeXml(getSpellDataList(), new File(path));
+		Utils.storeJson(getSpellDataList(), new File(path));
 		getPlugin().getLogger().log(Level.INFO,"SpellData stored");
 	}
 	

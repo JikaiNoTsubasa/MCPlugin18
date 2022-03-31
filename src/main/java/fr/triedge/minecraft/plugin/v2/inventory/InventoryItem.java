@@ -1,9 +1,5 @@
 package fr.triedge.minecraft.plugin.v2.inventory;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement(name="Item")
 public class InventoryItem {
 
 	private String itemType;
@@ -22,7 +18,6 @@ public class InventoryItem {
 		return itemType;
 	}
 	
-	@XmlElement(name="Type")
 	public void setItemType(String itemType) {
 		this.itemType = itemType;
 	}
@@ -30,7 +25,6 @@ public class InventoryItem {
 		return count;
 	}
 	
-	@XmlElement(name="Count")
 	public void setCount(int count) {
 		this.count = count;
 	}

@@ -2,11 +2,6 @@ package fr.triedge.minecraft.plugin.v2.warp;
 
 import java.util.ArrayList;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement(name="WarpList")
 public class WarpList {
 
 	private ArrayList<Warp> warps = new ArrayList<>();
@@ -21,8 +16,6 @@ public class WarpList {
 		return warps;
 	}
 
-	@XmlElementWrapper(name="WarpList")
-    @XmlElement(name="Warp")
 	public void setWarps(ArrayList<Warp> warps) {
 		this.warps = warps;
 	}
@@ -63,8 +56,6 @@ public class WarpList {
 		return warpGroups;
 	}
 
-	@XmlElementWrapper(name="WarpGroupList")
-    @XmlElement(name="WarpGroup")
 	public void setWarpGroups(ArrayList<WarpGroup> warpGroups) {
 		this.warpGroups = warpGroups;
 	}

@@ -1,11 +1,10 @@
 package fr.triedge.minecraft.plugin.v2.inventory;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.logging.Level;
-
-import javax.xml.bind.JAXBException;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -16,6 +15,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
+import com.google.gson.JsonIOException;
 
 import fr.triedge.minecraft.plugin.v2.MCPlugin18;
 import fr.triedge.minecraft.plugin.v2.exceptions.MCLoadingException;
@@ -101,7 +102,7 @@ public class InventoryManager implements Listener{
 		return Bukkit.createInventory(player, InventoryType.CHEST);
 	}
 	
-	public void save(String path) throws JAXBException {
+	public void save(String path) throws JsonIOException, IOException {
 		getPlugin().getLogger().log(Level.INFO,"Storing inventories into "+path+"...");
 		InventoryList list = new InventoryList();
 		for (Entry<String, Inventory> e : getInternalInv().entrySet()) {
@@ -118,7 +119,7 @@ public class InventoryManager implements Listener{
 			list.getInventories().add(i);
 			getPlugin().getLogger().info("Stored data for: "+playerName+"-"+id);
 		}
-		Utils.storeXml(list, new File(path));
+		Utils.storeJson(list, new File(path));
 		getPlugin().getLogger().log(Level.INFO,"Inventories stored");
 	}
 	
@@ -128,7 +129,7 @@ public class InventoryManager implements Listener{
 		File file = new File(path);
 		if (file.exists()) {
 			try {
-				list = Utils.loadXml(InventoryList.class, file);
+				list = Utils.loadJson(InventoryList.class, file);
 				if (list == null) {
 					getPlugin().getLogger().log(Level.SEVERE, "Inventory loaded list is null!");
 					throw new MCLoadingException("Inventory loaded list is null");
@@ -147,7 +148,7 @@ public class InventoryManager implements Listener{
 					getInternalInv().put(key, inv);
 					getPlugin().getLogger().info("Loaded inventory "+key);
 				}
-			} catch (JAXBException e) {
+			} catch (Exception e) {
 				getPlugin().getLogger().log(Level.SEVERE, "Cannot load config file: "+file.getAbsolutePath(), e);
 			}
 		}else {

@@ -1,0 +1,20 @@
+{
+  "warps": [
+    {
+      "name": "Name1",
+      "world": "World",
+      "group": "none",
+      "locationX": 0,
+      "locationY": 0,
+      "locationZ": 0,
+      "pitch": 0.0,
+      "yaw": 0.0
+    }
+  ],
+  "warpGroups": [
+    {
+      "name": "none",
+      "allowed": []
+    }
+  ]
+}
