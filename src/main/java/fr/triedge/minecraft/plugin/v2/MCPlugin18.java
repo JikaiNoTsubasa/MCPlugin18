@@ -14,6 +14,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 
+import com.google.gson.JsonIOException;
+
 import fr.triedge.minecraft.plugin.v2.custom.Custom;
 import fr.triedge.minecraft.plugin.v2.custom.CustomManager;
 import fr.triedge.minecraft.plugin.v2.detector.Detector;
@@ -21,7 +23,6 @@ import fr.triedge.minecraft.plugin.v2.exceptions.MCLoadingException;
 import fr.triedge.minecraft.plugin.v2.inventory.InventoryManager;
 import fr.triedge.minecraft.plugin.v2.magic.MagicManager;
 import fr.triedge.minecraft.plugin.v2.task.SaveTask;
-import fr.triedge.minecraft.plugin.v2.utils.Utils;
 import fr.triedge.minecraft.plugin.v2.warp.WarpManager;
 
 
@@ -208,7 +209,6 @@ public class MCPlugin18 extends JavaPlugin implements Listener{
 		getLogger().log(Level.INFO,"Initializing warps configuration");
 		setWarpManager(new WarpManager(this));
 		try {
-			Utils.createFileIfNotExists(WARP_CONFIG_FILE);
 			getWarpManager().loadWarps(WARP_CONFIG_FILE);
 		} catch (MCLoadingException | IOException e) {
 			getLogger().log(Level.SEVERE, "Cannot load config file: "+WARP_CONFIG_FILE, e);
@@ -226,7 +226,6 @@ public class MCPlugin18 extends JavaPlugin implements Listener{
 		getLogger().log(Level.INFO,"Initializing magic configuration");
 		setMagicManager(new MagicManager(this));
 		try {
-			Utils.createFileIfNotExists(SPELL_CONFIG_FILE);
 			getMagicManager().loadMagic(SPELL_CONFIG_FILE);
 		} catch (MCLoadingException | IOException e) {
 			getLogger().log(Level.SEVERE, "Cannot load config file: "+SPELL_CONFIG_FILE, e);
@@ -238,9 +237,8 @@ public class MCPlugin18 extends JavaPlugin implements Listener{
 		getLogger().log(Level.INFO,"Initializing inventory configuration");
 		setInventoryManager(new InventoryManager(this));
 		try {
-			Utils.createFileIfNotExists(INV_CONFIG_FILE);
 			getInventoryManager().loadInventories(INV_CONFIG_FILE);
-		} catch (MCLoadingException | IOException e) {
+		} catch (MCLoadingException | JsonIOException | IOException e) {
 			getLogger().log(Level.SEVERE, "Cannot load config file: "+INV_CONFIG_FILE, e);
 		}
 		getLogger().log(Level.INFO,"Initialization of inventory completed");

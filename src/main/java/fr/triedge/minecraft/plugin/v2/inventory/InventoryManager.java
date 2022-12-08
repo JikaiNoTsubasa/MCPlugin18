@@ -123,7 +123,7 @@ public class InventoryManager implements Listener{
 		getPlugin().getLogger().log(Level.INFO,"Inventories stored");
 	}
 	
-	public void loadInventories(String path) throws MCLoadingException {
+	public void loadInventories(String path) throws MCLoadingException, JsonIOException, IOException {
 		getPlugin().getLogger().log(Level.INFO,"Loading inventories from file "+path+"...");
 		InventoryList list = null;
 		File file = new File(path);
@@ -153,6 +153,8 @@ public class InventoryManager implements Listener{
 			}
 		}else {
 			getPlugin().getLogger().log(Level.WARNING, "Config file doesn't exists: "+file.getAbsolutePath());
+			file.getParentFile().mkdirs();
+			save(path);
 		}
 	}
 

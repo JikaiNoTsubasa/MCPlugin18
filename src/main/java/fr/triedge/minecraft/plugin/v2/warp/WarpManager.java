@@ -399,7 +399,7 @@ public class WarpManager implements Listener{
 		getPlugin().getLogger().log(Level.INFO,"Warps stored");
 	}
 
-	public void loadWarps(String path) throws MCLoadingException {
+	public void loadWarps(String path) throws MCLoadingException, JsonIOException, IOException {
 		getPlugin().getLogger().log(Level.INFO,"Loading warps from file "+path+"...");
 		File file = new File(path);
 		if (file.exists()) {
@@ -417,7 +417,8 @@ public class WarpManager implements Listener{
 
 		}else {
 			getPlugin().getLogger().log(Level.WARNING, "Config file doesn't exists, created empty in "+file.getAbsolutePath());
-			setWarpList(new WarpList());
+			file.getParentFile().mkdirs();
+			save(path);
 		}
 	}
 

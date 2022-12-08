@@ -28,7 +28,7 @@ import fr.triedge.minecraft.plugin.v2.utils.Utils;
 public class MagicManager implements Listener{
 	
 	private MCPlugin18 plugin;
-	private SpellDataList spellDataList;
+	private SpellDataList spellDataList = new SpellDataList();
 	
 	public MagicManager(MCPlugin18 plugin) {
 		setPlugin(plugin);
@@ -105,7 +105,7 @@ public class MagicManager implements Listener{
 		}
 	}
 	
-	public void loadMagic(String path) throws MCLoadingException {
+	public void loadMagic(String path) throws MCLoadingException, JsonIOException, IOException {
 		getPlugin().getLogger().log(Level.INFO,"Loading magic from file "+path+"...");
 		File file = new File(path);
 		if (file.exists()) {
@@ -122,7 +122,8 @@ public class MagicManager implements Listener{
 			}
 		}else {
 			getPlugin().getLogger().log(Level.WARNING, "Config file doesn't exists, created empty in "+file.getAbsolutePath());
-			setSpellDataList(new SpellDataList());
+			file.getParentFile().mkdirs();
+			save(path);
 		}
 		
 	}
