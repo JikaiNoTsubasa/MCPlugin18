@@ -23,14 +23,14 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
-import fr.triedge.minecraft.plugin.v2.MCPlugin18;
+import fr.triedge.minecraft.plugin.v2.MCPlugin19;
 import fr.triedge.minecraft.plugin.v2.utils.Utils;
 
 public class CustomManager implements Listener{
 	
-	private MCPlugin18 plugin;
+	private MCPlugin19 plugin;
 
-	public CustomManager(MCPlugin18 plugin) {
+	public CustomManager(MCPlugin19 plugin) {
 		setPlugin(plugin);
 	}
 	
@@ -269,11 +269,11 @@ public class CustomManager implements Listener{
 		return null;
 	}
 
-	public MCPlugin18 getPlugin() {
+	public MCPlugin19 getPlugin() {
 		return plugin;
 	}
 
-	public void setPlugin(MCPlugin18 plugin) {
+	public void setPlugin(MCPlugin19 plugin) {
 		this.plugin = plugin;
 	}
 

@@ -19,7 +19,7 @@ import org.bukkit.metadata.MetadataValue;
 
 import com.google.gson.JsonIOException;
 
-import fr.triedge.minecraft.plugin.v2.MCPlugin18;
+import fr.triedge.minecraft.plugin.v2.MCPlugin19;
 import fr.triedge.minecraft.plugin.v2.custom.Custom;
 import fr.triedge.minecraft.plugin.v2.exceptions.MCLoadingException;
 import fr.triedge.minecraft.plugin.v2.utils.Utils;
@@ -27,10 +27,10 @@ import fr.triedge.minecraft.plugin.v2.utils.Utils;
 
 public class MagicManager implements Listener{
 	
-	private MCPlugin18 plugin;
+	private MCPlugin19 plugin;
 	private SpellDataList spellDataList = new SpellDataList();
 	
-	public MagicManager(MCPlugin18 plugin) {
+	public MagicManager(MCPlugin19 plugin) {
 		setPlugin(plugin);
 	}
 	
@@ -135,11 +135,11 @@ public class MagicManager implements Listener{
 	}
 	
 
-	public MCPlugin18 getPlugin() {
+	public MCPlugin19 getPlugin() {
 		return plugin;
 	}
 
-	public void setPlugin(MCPlugin18 plugin) {
+	public void setPlugin(MCPlugin19 plugin) {
 		this.plugin = plugin;
 	}
 

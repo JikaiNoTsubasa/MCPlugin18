@@ -1,8 +1,8 @@
-name: MCPlugin18
-main: fr.triedge.minecraft.plugin.v2.MCPlugin18
-version: 1.18
+name: MCPlugin19
+main: fr.triedge.minecraft.plugin.v2.MCPlugin19
+version: 1.19
 author: Jikai
-api-version: 1.18
+api-version: 1.19
 
 commands:
   warp:
