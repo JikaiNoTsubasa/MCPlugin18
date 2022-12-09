@@ -120,7 +120,7 @@ public class InventoryManager implements Listener{
 				
 				InventoryItem item = new InventoryItem(stack.getType().toString(), stack.getAmount());
 				i.getItems().add(item);
-				getPlugin().getLogger().log(Level.INFO,"Added stack to list for storing ["+item.toString()+"]");
+				getPlugin().getLogger().log(Level.INFO,"Added stack for player "+key+" ["+item.toString()+"]");
 			}
 			list.getInventories().add(i);
 			getPlugin().getLogger().info("Stored data for: "+playerName+"-"+id);
