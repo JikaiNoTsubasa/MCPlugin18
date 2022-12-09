@@ -103,7 +103,7 @@ public class InventoryManager implements Listener{
 	}
 	
 	public void save(String path) throws JsonIOException, IOException {
-		getPlugin().getLogger().log(Level.INFO,"Storing inventories into "+path+"...");
+		getPlugin().getLogger().log(Level.INFO,"Storing "+getInternalInv().size()+" inventories into "+path+"...");
 		InventoryList list = new InventoryList();
 		for (Entry<String, Inventory> e : getInternalInv().entrySet()) {
 			String key = e.getKey();
@@ -113,8 +113,14 @@ public class InventoryManager implements Listener{
 			InventoryData i = new InventoryData(playerName);
 			i.setId(id);
 			for (ItemStack stack : inv.getContents()) {
+				if (stack == null) {
+					getPlugin().getLogger().log(Level.WARNING,"Stack is NULL for player "+key);
+					continue;
+				}
+				
 				InventoryItem item = new InventoryItem(stack.getType().toString(), stack.getAmount());
 				i.getItems().add(item);
+				getPlugin().getLogger().log(Level.INFO,"Added stack to list for storing ["+item.toString()+"]");
 			}
 			list.getInventories().add(i);
 			getPlugin().getLogger().info("Stored data for: "+playerName+"-"+id);

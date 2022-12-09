@@ -29,5 +29,7 @@ public class InventoryItem {
 		this.count = count;
 	}
 	
-	
+	public String toString() {
+		return getItemType()+":"+getCount();
+	}
 }
