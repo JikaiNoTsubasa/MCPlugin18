@@ -28,7 +28,7 @@ public class Utils {
 	}
 	
 	public static float getDamage(int level) {
-		return (level * 0.1f) + 5;
+		return (level * 0.1f) + 1;
 	}
 	
 	public static boolean createFileIfNotExists(File file) throws IOException {

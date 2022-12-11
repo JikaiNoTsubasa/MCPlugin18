@@ -64,7 +64,7 @@ public class MagicManager implements Listener{
 			if (player.getInventory().getItemInMainHand().getType() == Material.STICK) {
 				event.setDamage(spell.getDamage());
 				int xp = spell.addXP();
-				player.sendMessage("XP "+spell.getDisplayName()+": "+xp);
+				//player.sendMessage("XP "+spell.getDisplayName()+": "+xp);
 				getPlugin().getLogger().info(player.getName()+" deals "+spell.getDamage()+" damages to "+event.getEntity().getName());
 			}
 		}

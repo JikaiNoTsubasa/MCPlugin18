@@ -9,9 +9,11 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 
+import fr.triedge.minecraft.plugin.v2.MCPlugin19;
+
 public class Detector {
 
-	public static void detect(Player player) {
+	public static void detect(Player player, MCPlugin19 plugin) {
 		ArrayList<Block> blocks = new ArrayList<>();
 		int maxDist = 50;
 		Block block = player.getLocation().getBlock().getRelative(BlockFace.DOWN);
@@ -33,7 +35,11 @@ public class Detector {
 					loc.setY(y);
 					loc.setZ(z);
 					Material type = loc.getBlock().getType();
+					//plugin.getLogger().log(Level.INFO,"Detector: "+type.toString()+" ["+x+","+y+","+z+"]");
 					if (
+							type == Material.DEEPSLATE_DIAMOND_ORE ||
+							type == Material.DEEPSLATE_IRON_ORE ||
+							type == Material.DEEPSLATE_GOLD_ORE ||
 							type == Material.DIAMOND_ORE ||
 							type == Material.IRON_ORE ||
 							type == Material.GOLD_ORE ||
@@ -47,14 +53,15 @@ public class Detector {
 			}
 		}
 		if (blocks.isEmpty())
-			player.sendMessage(ChatColor.DARK_PURPLE+"Rien trouvï¿½");
+			player.sendMessage(ChatColor.DARK_PURPLE+"Rien trouvé");
 		else {
 			for (Block b : blocks) {
 				String name = b.getType().toString();
-				if (b.getType() == Material.DIAMOND_ORE)
+				if (b.getType() == Material.DIAMOND_ORE || b.getType() == Material.DEEPSLATE_DIAMOND_ORE)
 					player.sendMessage(ChatColor.AQUA+name+" -> X:"+b.getX()+" Y:"+b.getY()+" Z:"+b.getZ());
 				else
 					player.sendMessage(ChatColor.GREEN+name+" -> X:"+b.getX()+" Y:"+b.getY()+" Z:"+b.getZ());
+					
 			}
 		}
 	}

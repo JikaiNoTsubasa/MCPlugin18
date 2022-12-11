@@ -87,7 +87,7 @@ public class MCPlugin19 extends JavaPlugin implements Listener{
 	public static final String SPELL_CONFIG_FILE							= "plugins/MCPlugin19/magic.json";
 	public static final String INV_CONFIG_FILE								= "plugins/MCPlugin19/inventory.json";
 	public static final String METRIC_INFO									= "metrics.info";
-	public static final String VERSION										= "20220331.0";
+	public static final String VERSION										= "20221211.0";
 	public static final String VERSION_SUB									= "Raise of Lava";
 
 	private WarpManager warpManager;
@@ -108,7 +108,7 @@ public class MCPlugin19 extends JavaPlugin implements Listener{
 				getWarpManager().onWarpGroupCommand(player, args);
 				return true;
 			case "detector":
-				Detector.detect(player);
+				Detector.detect(player, this);
 				return true;
 			case "inv":
 				getInventoryManager().onInvCommand(player, args);
