@@ -15,16 +15,16 @@ public class Detector {
 
 	public static void detect(Player player, MCPlugin19 plugin) {
 		ArrayList<Block> blocks = new ArrayList<>();
-		int maxDist = 50;
+		int maxDist = 20;
 		Block block = player.getLocation().getBlock().getRelative(BlockFace.DOWN);
 		Location loc = block.getLocation();
 		player.sendMessage(ChatColor.GOLD+"Recherche avec le detecteur:");
 		int startX = block.getX() -(maxDist/2);
-		int startY = block.getY() -(maxDist/2);
+		int startY = block.getY() -2;
 		int startZ = block.getZ() -(maxDist/2);
 
 		int endX = block.getX() +(maxDist/2);
-		int endY = block.getY() +(maxDist/2);
+		int endY = block.getY() +2;
 		int endZ = block.getZ() +(maxDist/2);
 
 		// 20200706.4

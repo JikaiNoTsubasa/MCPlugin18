@@ -76,6 +76,11 @@ public class CustomManager implements Listener{
 			if (block == null)
 				return;
 			if (block.getType() == Material.DIAMOND_ORE ||
+					block.getType() == Material.DEEPSLATE_DIAMOND_ORE ||
+					block.getType() == Material.DEEPSLATE_GOLD_ORE ||
+					block.getType() == Material.DEEPSLATE_EMERALD_ORE ||
+					block.getType() == Material.DEEPSLATE_IRON_ORE ||
+					block.getType() == Material.DEEPSLATE_COAL_ORE ||
 					block.getType() == Material.GOLD_ORE ||
 					block.getType() == Material.EMERALD_ORE ||
 					block.getType() == Material.IRON_ORE ||
