@@ -23,6 +23,14 @@ public class Utils {
 	public static final String SYSLOG					= "SYSTEM: ";
 	public static final String INFO						= "INFO: ";
 	
+	public static float getRequiredXp(int level) {
+		return (level * 1.1f) + 50;
+	}
+	
+	public static float getDamage(int level) {
+		return (level * 0.1f) + 5;
+	}
+	
 	public static boolean createFileIfNotExists(File file) throws IOException {
 		file.getParentFile().mkdirs();
 		return file.createNewFile(); // if file already exists will do nothing

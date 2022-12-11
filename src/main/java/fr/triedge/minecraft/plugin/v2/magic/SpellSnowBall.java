@@ -8,6 +8,8 @@ import org.bukkit.entity.Snowball;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.Plugin;
 
+import fr.triedge.minecraft.plugin.v2.utils.Utils;
+
 public class SpellSnowBall extends Spell{
 
 	public SpellSnowBall(Player player, SpellDataList config, Plugin plugin) {
@@ -53,9 +55,10 @@ public class SpellSnowBall extends Spell{
 		}
 		
 		sd.setSnowballXp(sd.getSnowballXp()+xp);
-		if (xp % 50 == 0) {
+		if (sd.getSnowballXp() >= Utils.getRequiredXp(sd.getSnowballLevel())) {
 			// level up every 50 xp
 			sd.setSnowballLevel(sd.getSnowballLevel()+1);
+			sd.setSnowballXp(0); // Reset xp to 0
 			float player_xp_add = sd.getSnowballLevel()*2.5f;
 			player.setTotalExperience(player.getTotalExperience() + (int)player_xp_add);
 			player.sendMessage(ChatColor.GREEN+"Level UP["+getName()+"]: "+getDisplayName()+" lvl "+sd.getSnowballLevel());
@@ -72,7 +75,7 @@ public class SpellSnowBall extends Spell{
 		if (sd != null) {
 			level = sd.getSnowballLevel();
 		}
-		return getDamageFactor()*level;
+		return Utils.getDamage(level);
 	}
 
 }

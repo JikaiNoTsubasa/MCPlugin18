@@ -11,6 +11,8 @@ import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.BlockIterator;
 
+import fr.triedge.minecraft.plugin.v2.utils.Utils;
+
 public class SpellFireBall extends Spell{
 
 	public SpellFireBall(Player player, SpellDataList config, Plugin plugin) {
@@ -66,10 +68,11 @@ public class SpellFireBall extends Spell{
 		}
 		
 		sd.setFireballXp(sd.getFireballXp()+xp);
-		if (xp % 50 == 0) {
+		if (sd.getFireballXp() >= Utils.getRequiredXp(sd.getFireballLevel())) {
 			// level up every 50 xp
 			sd.setFireballLevel(sd.getFireballLevel()+1);
 			float player_xp_add = sd.getFireballLevel()*2.5f;
+			sd.setFireballXp(0);
 			player.setTotalExperience(player.getTotalExperience() + (int)player_xp_add);
 			player.sendMessage(ChatColor.GREEN+"Level UP["+getName()+"]: "+getDisplayName()+" lvl "+sd.getFireballLevel());
 			player.sendMessage(ChatColor.GREEN+"Personnage XP +"+player_xp_add);

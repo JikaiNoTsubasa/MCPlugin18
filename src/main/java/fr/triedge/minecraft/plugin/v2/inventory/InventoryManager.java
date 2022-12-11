@@ -112,15 +112,19 @@ public class InventoryManager implements Listener{
 			Inventory inv = e.getValue();
 			InventoryData i = new InventoryData(playerName);
 			i.setId(id);
+			int stackNullCount = 0;
 			for (ItemStack stack : inv.getContents()) {
 				if (stack == null) {
-					getPlugin().getLogger().log(Level.WARNING,"Stack is NULL for player "+key);
+					stackNullCount++;
 					continue;
 				}
 				
 				InventoryItem item = new InventoryItem(stack.getType().toString(), stack.getAmount());
 				i.getItems().add(item);
 				getPlugin().getLogger().log(Level.INFO,"Added stack for player "+key+" ["+item.toString()+"]");
+			}
+			if (stackNullCount > 0) {
+				getPlugin().getLogger().log(Level.WARNING,"Stack (count: "+stackNullCount+") is NULL for player "+key);
 			}
 			list.getInventories().add(i);
 			getPlugin().getLogger().info("Stored data for: "+playerName+"-"+id);
