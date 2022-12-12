@@ -58,7 +58,7 @@ public class WarpManager implements Listener{
 			}
 		}else {
 			// Display help
-			player.sendMessage(ChatColor.RED+"Il manque un paramÃ¨tre!");
+			player.sendMessage(ChatColor.RED+"Il manque un paramètre!");
 		}
 	}
 

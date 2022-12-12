@@ -17,3 +17,6 @@ commands:
   inv:
     description: Permet de creer des inventaires
     usage: /inv id|list|share
+  clearsnowball:
+    description: Clear toutes les snowballs sur la map
+    usage: /clearsnowball

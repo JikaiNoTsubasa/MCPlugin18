@@ -1,13 +1,17 @@
 package fr.triedge.minecraft.plugin.v2;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Snowball;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -113,9 +117,26 @@ public class MCPlugin19 extends JavaPlugin implements Listener{
 			case "inv":
 				getInventoryManager().onInvCommand(player, args);
 				return true;
+			case "clearsnowball":
+				removeWorldSnowBalls();
+				return true;
 			}
 		}
 		return false;
+	}
+	
+	public void removeWorldSnowBalls() {
+		List<World> worlds = getServer().getWorlds();
+		for (World world : worlds) {
+			List<Entity> entList = world.getEntities();//get all entities in the world
+			 for(Entity current : entList){//loop through the list
+		            if (current instanceof Snowball){//make sure we aren't deleting mobs/players
+		            	current.remove();//remove it
+		            }
+			 }
+		}
+ 
+       
 	}
 
 	@Override
