@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -24,11 +25,33 @@ public class Utils {
 	public static final String INFO						= "INFO: ";
 	
 	public static float getRequiredXp(int level) {
-		return (level * 1.1f) + 50;
+		return (level * 0.1f) + 40;
 	}
 	
 	public static float getDamage(int level) {
-		return (level * 0.1f) + 1;
+		return (level * 0.15f) + 1;
+	}
+	
+	public static float getCopperBowDamage(int level) {
+		return (level * 0.2f)+ 5;
+	}
+	
+	public static float getCopperBowRequiredXp(int level) {
+		return (level * 1f) + 5;
+	}
+	
+	public static boolean isDetectable(Material type) {
+		return type == Material.DEEPSLATE_DIAMOND_ORE ||
+				type == Material.DEEPSLATE_IRON_ORE ||
+				type == Material.DEEPSLATE_GOLD_ORE ||
+				type == Material.DIAMOND_ORE ||
+				type == Material.IRON_ORE ||
+				type == Material.GOLD_ORE ||
+				type == Material.EMERALD_ORE ||
+				type == Material.ANCIENT_DEBRIS ||
+				type == Material.NETHERITE_BLOCK ||
+				type == Material.LAPIS_ORE ||
+				type == Material.ANCIENT_DEBRIS;
 	}
 	
 	public static boolean createFileIfNotExists(File file) throws IOException {

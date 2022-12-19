@@ -22,6 +22,8 @@ public class SaveTask implements Runnable{
 			this.plugin.getLogger().log(Level.INFO,"[SCHEDULED TASK] Configuration Magic saved");
 			this.plugin.getInventoryManager().save(MCPlugin19.INV_CONFIG_FILE);
 			this.plugin.getLogger().log(Level.INFO,"[SCHEDULED TASK] Configuration Inventories saved");
+			this.plugin.getArcheryManager().save(MCPlugin19.ARCHERY_CONFIG_FILE);
+			this.plugin.getLogger().log(Level.INFO,"[SCHEDULED TASK] Configuration Archery saved");
 		} catch (Exception e) {
 			this.plugin.getLogger().log(Level.SEVERE,"Cannot save configuration",e);
 		}

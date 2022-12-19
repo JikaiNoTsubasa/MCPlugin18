@@ -20,3 +20,6 @@ commands:
   clearsnowball:
     description: Clear toutes les snowballs sur la map
     usage: /clearsnowball
+  magic:
+    description: Affiche les info sur la magie
+    usage: /magic

@@ -10,6 +10,7 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 
 import fr.triedge.minecraft.plugin.v2.MCPlugin19;
+import fr.triedge.minecraft.plugin.v2.utils.Utils;
 
 public class Detector {
 
@@ -36,17 +37,7 @@ public class Detector {
 					loc.setZ(z);
 					Material type = loc.getBlock().getType();
 					//plugin.getLogger().log(Level.INFO,"Detector: "+type.toString()+" ["+x+","+y+","+z+"]");
-					if (
-							type == Material.DEEPSLATE_DIAMOND_ORE ||
-							type == Material.DEEPSLATE_IRON_ORE ||
-							type == Material.DEEPSLATE_GOLD_ORE ||
-							type == Material.DIAMOND_ORE ||
-							type == Material.IRON_ORE ||
-							type == Material.GOLD_ORE ||
-							type == Material.EMERALD_ORE ||
-							type == Material.ANCIENT_DEBRIS ||
-							type == Material.NETHERITE_BLOCK ||
-							type == Material.LAPIS_ORE) {
+					if (Utils.isDetectable(type)) {
 						blocks.add(loc.getBlock());
 					}
 				}

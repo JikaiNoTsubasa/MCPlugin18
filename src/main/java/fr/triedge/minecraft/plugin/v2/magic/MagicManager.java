@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.logging.Level;
 
 import org.bukkit.Material;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.SmallFireball;
 import org.bukkit.entity.Snowball;
@@ -63,7 +64,7 @@ public class MagicManager implements Listener{
 		if (player != null) {
 			if (player.getInventory().getItemInMainHand().getType() == Material.STICK) {
 				event.setDamage(spell.getDamage());
-				int xp = spell.addXP();
+				//int xp = spell.addXP();
 				//player.sendMessage("XP "+spell.getDisplayName()+": "+xp);
 				getPlugin().getLogger().info(player.getName()+" deals "+spell.getDamage()+" damages to "+event.getEntity().getName());
 			}
@@ -102,6 +103,12 @@ public class MagicManager implements Listener{
 				getPlugin().getLogger().info("Fire skill touched, sent by player: "+player.getName());
 				setDamageForSpell(player, event, new SpellFireBall(player, getSpellDataList(), getPlugin()));
 			}
+		}else if (event.getDamager() instanceof Arrow) {
+			Arrow ar = (Arrow)event.getDamager();
+			List<MetadataValue> list_val = ar.getMetadata("player");
+			if (list_val != null && !list_val.isEmpty()) {
+				
+			}
 		}
 	}
 	
@@ -115,7 +122,7 @@ public class MagicManager implements Listener{
 					getPlugin().getLogger().log(Level.SEVERE, "SpellData loaded list is null!");
 					throw new MCLoadingException("SpellData loaded list is null");
 				}
-				getPlugin().getLogger().log(Level.INFO,"Warps loaded");
+				getPlugin().getLogger().log(Level.INFO,"Speels loaded");
 				setSpellDataList(list);
 			} catch (Exception e) {
 				getPlugin().getLogger().log(Level.SEVERE, "Cannot load config file: "+file.getAbsolutePath(), e);

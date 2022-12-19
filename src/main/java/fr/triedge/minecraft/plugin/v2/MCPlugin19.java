@@ -20,13 +20,16 @@ import org.bukkit.scheduler.BukkitScheduler;
 
 import com.google.gson.JsonIOException;
 
+import fr.triedge.minecraft.plugin.v2.archery.ArcheryManager;
 import fr.triedge.minecraft.plugin.v2.custom.Custom;
 import fr.triedge.minecraft.plugin.v2.custom.CustomManager;
 import fr.triedge.minecraft.plugin.v2.detector.Detector;
 import fr.triedge.minecraft.plugin.v2.exceptions.MCLoadingException;
 import fr.triedge.minecraft.plugin.v2.inventory.InventoryManager;
 import fr.triedge.minecraft.plugin.v2.magic.MagicManager;
+import fr.triedge.minecraft.plugin.v2.magic.SpellData;
 import fr.triedge.minecraft.plugin.v2.task.SaveTask;
+import fr.triedge.minecraft.plugin.v2.utils.Utils;
 import fr.triedge.minecraft.plugin.v2.warp.WarpManager;
 
 
@@ -89,15 +92,17 @@ public class MCPlugin19 extends JavaPlugin implements Listener{
 
 	public static final String WARP_CONFIG_FILE								= "plugins/MCPlugin19/warp.json";
 	public static final String SPELL_CONFIG_FILE							= "plugins/MCPlugin19/magic.json";
+	public static final String ARCHERY_CONFIG_FILE							= "plugins/MCPlugin19/archery.json";
 	public static final String INV_CONFIG_FILE								= "plugins/MCPlugin19/inventory.json";
 	public static final String METRIC_INFO									= "metrics.info";
-	public static final String VERSION										= "20221211.0";
-	public static final String VERSION_SUB									= "Raise of Lava";
+	public static final String VERSION										= "20221219.0";
+	public static final String VERSION_SUB									= "Archery Master";
 
 	private WarpManager warpManager;
 	private CustomManager customManager;
 	private MagicManager magicManager;
 	private InventoryManager inventoryManager;
+	private ArcheryManager archeryManager;
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -120,11 +125,27 @@ public class MCPlugin19 extends JavaPlugin implements Listener{
 			case "clearsnowball":
 				removeWorldSnowBalls();
 				return true;
+			case "magic":
+				showMagicDetails(player);
+				return true;
 			}
 		}
 		return false;
 	}
 	
+	private void showMagicDetails(Player player) {
+		SpellData data = getMagicManager().getSpellDataList().getDataForPlayer(player.getDisplayName());
+		if (data == null) {
+			player.sendMessage(ChatColor.RED+"Données non trouvées pour le joueur "+player.getDisplayName());
+			return;
+		}
+		player.sendMessage(ChatColor.AQUA+"+= MAGIE ============================+");
+		player.sendMessage(ChatColor.AQUA+" Snowball level: "+data.getSnowballLevel());
+		player.sendMessage(ChatColor.AQUA+" Snowball dmg: "+Utils.getDamage(data.getSnowballLevel()));
+		player.sendMessage(ChatColor.AQUA+" Snowball next lvl: "+(Utils.getRequiredXp(data.getSnowballLevel())-data.getSnowballXp()));
+		player.sendMessage(ChatColor.AQUA+"+====================================+");
+	}
+
 	public void removeWorldSnowBalls() {
 		List<World> worlds = getServer().getWorlds();
 		for (World world : worlds) {
@@ -160,12 +181,16 @@ public class MCPlugin19 extends JavaPlugin implements Listener{
 		
 		// Init inventory
 		initInventory();
+		
+		// Init archery
+		initArchery();
 
 		getServer().getPluginManager().registerEvents(this, this);
 		getServer().getPluginManager().registerEvents(getWarpManager(), this);
 		getServer().getPluginManager().registerEvents(getCustomManager(), this);
 		getServer().getPluginManager().registerEvents(getMagicManager(), this);
 		getServer().getPluginManager().registerEvents(getInventoryManager(), this);
+		getServer().getPluginManager().registerEvents(getArcheryManager(), this);
 
 		// Scheduled tasks
 		BukkitScheduler scheduler = getServer().getScheduler();
@@ -202,6 +227,15 @@ public class MCPlugin19 extends JavaPlugin implements Listener{
 		getServer().addRecipe(Custom.createImprovedDiamondPickaxeRecipe(this, Material.JUNGLE_LOG));
 		getServer().addRecipe(Custom.createImprovedDiamondPickaxeRecipe(this, Material.OAK_LOG));
 		getServer().addRecipe(Custom.createImprovedDiamondPickaxeRecipe(this, Material.SPRUCE_LOG));
+		
+		getServer().addRecipe(Custom.createImprovedNetheritePickaxeRecipe(this, Material.ACACIA_LOG));
+		getServer().addRecipe(Custom.createImprovedNetheritePickaxeRecipe(this, Material.BIRCH_LOG));
+		getServer().addRecipe(Custom.createImprovedNetheritePickaxeRecipe(this, Material.DARK_OAK_LOG));
+		getServer().addRecipe(Custom.createImprovedNetheritePickaxeRecipe(this, Material.JUNGLE_LOG));
+		getServer().addRecipe(Custom.createImprovedNetheritePickaxeRecipe(this, Material.OAK_LOG));
+		getServer().addRecipe(Custom.createImprovedNetheritePickaxeRecipe(this, Material.SPRUCE_LOG));
+		
+		getServer().addRecipe(Custom.createImprovedCopperBowRecipe(this));
 
 		getServer().addRecipe(Custom.createUltimateBottleRecipe(this));
 		getServer().addRecipe(Custom.createSnowWandRecipe(this));
@@ -209,6 +243,7 @@ public class MCPlugin19 extends JavaPlugin implements Listener{
 		getServer().addRecipe(Custom.createGrenadeRecipe(this));
 		getServer().addRecipe(Custom.createNukeRecipe(this));
 		getServer().addRecipe(Custom.createInventoryPotionRecipe(this));
+		getServer().addRecipe(Custom.createImprovedArrowRecipe(this));
 		getLogger().log(Level.INFO, "Custom recipes created");
 	}
 
@@ -224,6 +259,17 @@ public class MCPlugin19 extends JavaPlugin implements Listener{
 		p.sendMessage(ChatColor.GREEN + "MCPlugin v2 "+VERSION);
 		p.sendMessage(ChatColor.GREEN + "Les info sur triedge.ovh");
 		Custom.displayTitle(p, ChatColor.AQUA+"Triedge", VERSION_SUB);
+	}
+	
+	private void initArchery() {
+		getLogger().log(Level.INFO,"Initializing archery configuration");
+		setArcheryManager(new ArcheryManager(this));
+		try {
+			getArcheryManager().loadArchery(ARCHERY_CONFIG_FILE);
+		} catch (JsonIOException | IOException e) {
+			getLogger().log(Level.SEVERE, "Cannot load config file: "+ARCHERY_CONFIG_FILE, e);
+		}
+		getLogger().log(Level.INFO,"Initialization of archery completed");
 	}
 
 	private void initWarp() {
@@ -296,4 +342,14 @@ public class MCPlugin19 extends JavaPlugin implements Listener{
 	public void setInventoryManager(InventoryManager inventoryManager) {
 		this.inventoryManager = inventoryManager;
 	}
+
+	public ArcheryManager getArcheryManager() {
+		return archeryManager;
+	}
+
+	public void setArcheryManager(ArcheryManager archeryManager) {
+		this.archeryManager = archeryManager;
+	}
+	
+	
 }

@@ -60,13 +60,14 @@ public class CustomManager implements Listener{
 		if (name.equals(Custom.IMP_GOLD_PICKAXE) ||
 				name.equals(Custom.IMP_DIAMOND_PICKAXE) ||
 				name.equals(Custom.IMP_GOLD_SHOVEL) ||
-				name.equals(Custom.IMP_GOLD_AXE)) {
+				name.equals(Custom.IMP_GOLD_AXE) ||
+				name.equals(Custom.IMP_NETHERITE_PICKAXE)) {
 			// Manage durability
 			int durability = Integer.valueOf(item.getItemMeta().getLore().get(0));
 			durability--;
 			if (durability <= 0) {
 				player.getInventory().remove(item);
-				player.sendMessage(ChatColor.RED+item.getItemMeta().getDisplayName()+" est cassÃ©!");
+				player.sendMessage(ChatColor.RED+item.getItemMeta().getDisplayName()+" est cassé");
 			}else {
 				Custom.decreaseDurability(item);
 			}
@@ -75,22 +76,33 @@ public class CustomManager implements Listener{
 			Block block = event.getBlock();
 			if (block == null)
 				return;
-			if (block.getType() == Material.DIAMOND_ORE ||
-					block.getType() == Material.DEEPSLATE_DIAMOND_ORE ||
-					block.getType() == Material.DEEPSLATE_GOLD_ORE ||
-					block.getType() == Material.DEEPSLATE_EMERALD_ORE ||
-					block.getType() == Material.DEEPSLATE_IRON_ORE ||
-					block.getType() == Material.DEEPSLATE_COAL_ORE ||
-					block.getType() == Material.GOLD_ORE ||
-					block.getType() == Material.EMERALD_ORE ||
-					block.getType() == Material.IRON_ORE ||
-					block.getType() == Material.NETHER_GOLD_ORE ||
-					block.getType() == Material.NETHER_QUARTZ_ORE ||
-					block.getType() == Material.NETHERITE_BLOCK ||
-					block.getType() == Material.COAL_ORE) {
+			Material type = block.getType();
+			if (type == Material.DIAMOND_ORE ||
+					type == Material.DEEPSLATE_DIAMOND_ORE ||
+					type == Material.DEEPSLATE_GOLD_ORE ||
+					type == Material.DEEPSLATE_EMERALD_ORE ||
+					type == Material.DEEPSLATE_IRON_ORE ||
+					type == Material.DEEPSLATE_COAL_ORE ||
+					type == Material.GOLD_ORE ||
+					type == Material.EMERALD_ORE ||
+					type == Material.IRON_ORE ||
+					type == Material.NETHER_GOLD_ORE ||
+					type == Material.NETHER_QUARTZ_ORE ||
+					type == Material.NETHERITE_BLOCK ||
+					type == Material.COAL_ORE ||
+					type == Material.ANCIENT_DEBRIS ||
+					type == Material.SNOW) {
 				if (!block.getDrops().isEmpty()) {
-					ItemStack stack = new ItemStack(block.getDrops().iterator().next().getType(), 4);
-					block.getLocation().getWorld().dropItemNaturally(block.getLocation(), stack);
+					if (name.equals(Custom.IMP_NETHERITE_PICKAXE)) {
+						ItemStack stack = new ItemStack(block.getDrops().iterator().next().getType(), 5);
+						block.getLocation().getWorld().dropItemNaturally(block.getLocation(), stack);
+					}else if (name.equals(Custom.IMP_DIAMOND_PICKAXE)){
+						ItemStack stack = new ItemStack(block.getDrops().iterator().next().getType(), 3);
+						block.getLocation().getWorld().dropItemNaturally(block.getLocation(), stack);
+					}else {
+						ItemStack stack = new ItemStack(block.getDrops().iterator().next().getType(), 2);
+						block.getLocation().getWorld().dropItemNaturally(block.getLocation(), stack);
+					}
 
 				}
 			}

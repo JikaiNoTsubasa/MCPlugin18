@@ -19,10 +19,13 @@ public class Custom {
 	public static final String IMP_GOLD_AXE					= ChatColor.LIGHT_PURPLE+"Improved Gold Axe";
 	public static final String IMP_GOLD_SHOVEL				= ChatColor.LIGHT_PURPLE+"Improved Gold Shovel";
 	public static final String IMP_DIAMOND_PICKAXE			= ChatColor.LIGHT_PURPLE+"Improved Diamond Pickaxe";
+	public static final String IMP_NETHERITE_PICKAXE		= ChatColor.LIGHT_PURPLE+"Improved Netherite Pickaxe";
 	public static final String WAND_SNOW					= ChatColor.LIGHT_PURPLE+"Snow Wand";
 	public static final String WAND_FIRE					= ChatColor.LIGHT_PURPLE+"Fire Wand";
 	public static final String GRENADE						= ChatColor.LIGHT_PURPLE+"Grenade";
 	public static final String NUKE							= ChatColor.LIGHT_PURPLE+"NUKE";
+	public static final String ARROW						= ChatColor.LIGHT_PURPLE+"Fleche";
+	public static final String IMP_COPPER_BOW				= ChatColor.LIGHT_PURPLE+"Improved Copper Bow";
 	public static final String INVENTORY_POTION				= ChatColor.LIGHT_PURPLE+"Inventory Potion";
 	
 	public static final String BOSS_SKELETON_LVL				= ChatColor.RED+"BOSS Skeleton lvl";
@@ -99,6 +102,30 @@ public class Custom {
 		return axe;
 	}
 	
+	public static ItemStack createImprovedNetheritePickaxe() {
+		ItemStack axe = new ItemStack(Material.NETHERITE_PICKAXE);
+		ItemMeta meta = axe.getItemMeta();
+		ArrayList<String> lore = new ArrayList<>();
+		lore.add("6000");
+		meta.setDisplayName(IMP_NETHERITE_PICKAXE);
+		meta.setLore(lore);
+		meta.setUnbreakable(true);
+		axe.setItemMeta(meta);
+		return axe;
+	}
+	
+	public static ItemStack createImprovedCopperBow() {
+		ItemStack bow = new ItemStack(Material.BOW);
+		ItemMeta meta = bow.getItemMeta();
+		ArrayList<String> lore = new ArrayList<>();
+		lore.add("500");
+		meta.setDisplayName(IMP_COPPER_BOW);
+		meta.setLore(lore);
+		meta.setUnbreakable(true);
+		bow.setItemMeta(meta);
+		return bow;
+	}
+	
 	public static ItemStack createSnowWand() {
 		ItemStack item = new ItemStack(Material.STICK);
 		ItemMeta meta = item.getItemMeta();
@@ -144,6 +171,19 @@ public class Custom {
 		meta.setDisplayName(NUKE);
 		meta.setLore(lore);
 		item.setItemMeta(meta);
+		return item;
+	}
+	
+	public static ItemStack createArrrow(int number) {
+		ItemStack item = new ItemStack(Material.ARROW, number);
+		/*
+		ItemMeta meta = item.getItemMeta();
+		ArrayList<String> lore = new ArrayList<>();
+		lore.add("Une fleche spéciale");
+		meta.setDisplayName(ARROW);
+		meta.setLore(lore);
+		item.setItemMeta(meta);
+		*/
 		return item;
 	}
 	
@@ -207,6 +247,24 @@ public class Custom {
 		return recipe;
 	}
 	
+	public static ShapedRecipe createImprovedNetheritePickaxeRecipe(Plugin plugin, Material log) {
+		NamespacedKey key = new NamespacedKey(plugin, "jikai_netheriteaxe_"+log.name());
+		ShapedRecipe recipe = new ShapedRecipe(key, createImprovedNetheritePickaxe());
+		recipe.shape("DDD"," B "," B ");
+		recipe.setIngredient('D', Material.NETHERITE_BLOCK);
+		recipe.setIngredient('B', log);
+		return recipe;
+	}
+	
+	public static ShapedRecipe createImprovedCopperBowRecipe(Plugin plugin) {
+		NamespacedKey key = new NamespacedKey(plugin, "jikai_copper_bow");
+		ShapedRecipe recipe = new ShapedRecipe(key, createImprovedCopperBow());
+		recipe.shape(" DS","D S"," DS");
+		recipe.setIngredient('D', Material.COPPER_BLOCK);
+		recipe.setIngredient('S', Material.STRING);
+		return recipe;
+	}
+	
 	public static ShapedRecipe createUltimateBottleRecipe(Plugin plugin) {
 		NamespacedKey key = new NamespacedKey(plugin, "jikai_utl_bottle");
 		ShapedRecipe recipe = new ShapedRecipe(key, createUtlBottle());
@@ -258,6 +316,14 @@ public class Custom {
 		recipe.shape("   "," T "," S ");
 		recipe.setIngredient('T', Material.STRING);
 		recipe.setIngredient('S', Material.GUNPOWDER);
+		return recipe;
+	}
+	
+	public static ShapedRecipe createImprovedArrowRecipe(Plugin plugin) {
+		NamespacedKey key = new NamespacedKey(plugin, "jikai_arrow");
+		ShapedRecipe recipe = new ShapedRecipe(key, createArrrow(5));
+		recipe.shape(" T "," T "," T ");
+		recipe.setIngredient('T', Material.STICK);
 		return recipe;
 	}
 	
