@@ -20,6 +20,7 @@ import org.bukkit.scheduler.BukkitScheduler;
 
 import com.google.gson.JsonIOException;
 
+import fr.triedge.minecraft.plugin.v2.archery.ArcheryData;
 import fr.triedge.minecraft.plugin.v2.archery.ArcheryManager;
 import fr.triedge.minecraft.plugin.v2.custom.Custom;
 import fr.triedge.minecraft.plugin.v2.custom.CustomManager;
@@ -128,6 +129,9 @@ public class MCPlugin19 extends JavaPlugin implements Listener{
 			case "magic":
 				showMagicDetails(player);
 				return true;
+			case "archery":
+				showArcheryDetails(player);
+				return true;
 			}
 		}
 		return false;
@@ -144,6 +148,18 @@ public class MCPlugin19 extends JavaPlugin implements Listener{
 		player.sendMessage(ChatColor.AQUA+" Snowball dmg: "+Utils.getDamage(data.getSnowballLevel()));
 		player.sendMessage(ChatColor.AQUA+" Snowball next lvl: "+(Utils.getRequiredXp(data.getSnowballLevel())-data.getSnowballXp()));
 		player.sendMessage(ChatColor.AQUA+"+====================================+");
+	}
+	
+	private void showArcheryDetails(Player player) {
+		ArcheryData data = getArcheryManager().getArcheryDataList().getDataForPlayer(player.getDisplayName());
+		if (data == null) {
+			player.sendMessage(ChatColor.RED+"Données non trouvées pour le joueur "+player.getDisplayName());
+			return;
+		}
+		player.sendMessage(ChatColor.AQUA+"+= ARCHERY ============================+");
+		player.sendMessage(ChatColor.AQUA+" Copper level: "+data.getCopperLevel());
+		player.sendMessage(ChatColor.AQUA+" Copper dmg: "+Utils.getCopperBowDamage(data.getCopperLevel()));
+		player.sendMessage(ChatColor.AQUA+"+======================================+");
 	}
 
 	public void removeWorldSnowBalls() {

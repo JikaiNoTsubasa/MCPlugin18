@@ -23,3 +23,6 @@ commands:
   magic:
     description: Affiche les info sur la magie
     usage: /magic
+  archery:
+    description: Affiche les info sur les arcs
+    usage: /archery
