@@ -45,6 +45,10 @@ public class ArcheryManager implements Listener{
 				if (name.equals(Custom.IMP_FIRE_BOW)) {
 					event.getProjectile().setFireTicks(200);
 				}
+				
+				if (name.equals(Custom.IMP_ICE_BOW)) {
+					event.getProjectile().setFreezeTicks(200);
+				}
 			}
 		}
 	}
@@ -78,6 +82,9 @@ public class ArcheryManager implements Listener{
 		}else if (bow.equals(Custom.IMP_FIRE_BOW)) {
 			dmg = Utils.getFireBowDamage(data.getFireBowLevel());
 		}
+		else if (bow.equals(Custom.IMP_ICE_BOW)) {
+			dmg = Utils.getIceBowDamage(data.getIceBowLevel());
+		}
 		return dmg;
 	}
 	
@@ -104,6 +111,17 @@ public class ArcheryManager implements Listener{
 				p.sendMessage(ChatColor.GREEN+bow+" level: "+data.getFireBowLevel());
 			}else {
 				data.setFireBowXp(xp);
+			}
+		}else if (bow.equals(Custom.IMP_ICE_BOW)) {
+			int xp = data.getIceBowXp()+1;
+			float nextXp = Utils.getIceBowRequiredXp(data.getIceBowLevel());
+			if (xp >= nextXp) {
+				data.setIceBowXp(0);
+				data.setIceBowLevel(data.getIceBowLevel()+1);
+				Player p = Utils.getPlayer(player);
+				p.sendMessage(ChatColor.GREEN+bow+" level: "+data.getIceBowLevel());
+			}else {
+				data.setIceBowXp(xp);
 			}
 		}
 	}
