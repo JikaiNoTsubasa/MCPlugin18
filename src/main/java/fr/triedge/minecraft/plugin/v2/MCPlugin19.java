@@ -159,6 +159,8 @@ public class MCPlugin19 extends JavaPlugin implements Listener{
 		player.sendMessage(ChatColor.AQUA+"+= ARCHERY ============================+");
 		player.sendMessage(ChatColor.AQUA+" Copper level: "+data.getCopperLevel());
 		player.sendMessage(ChatColor.AQUA+" Copper dmg: "+Utils.getCopperBowDamage(data.getCopperLevel()));
+		player.sendMessage(ChatColor.AQUA+" Fire level: "+data.getFireBowLevel());
+		player.sendMessage(ChatColor.AQUA+" Fire dmg: "+Utils.getFireBowDamage(data.getFireBowLevel()));
 		player.sendMessage(ChatColor.AQUA+"+======================================+");
 	}
 
@@ -252,6 +254,7 @@ public class MCPlugin19 extends JavaPlugin implements Listener{
 		getServer().addRecipe(Custom.createImprovedNetheritePickaxeRecipe(this, Material.SPRUCE_LOG));
 		
 		getServer().addRecipe(Custom.createImprovedCopperBowRecipe(this));
+		getServer().addRecipe(Custom.createImprovedFireBowRecipe(this));
 
 		getServer().addRecipe(Custom.createUltimateBottleRecipe(this));
 		getServer().addRecipe(Custom.createSnowWandRecipe(this));

@@ -18,6 +18,7 @@ import fr.triedge.minecraft.plugin.v2.MCPlugin19;
 import fr.triedge.minecraft.plugin.v2.custom.Custom;
 import fr.triedge.minecraft.plugin.v2.exceptions.MCLoadingException;
 import fr.triedge.minecraft.plugin.v2.utils.Utils;
+import net.md_5.bungee.api.ChatColor;
 
 public class ArcheryManager implements Listener{
 	
@@ -40,6 +41,10 @@ public class ArcheryManager implements Listener{
 				//getPlugin().getLogger().log(Level.INFO, "Bow name is: "+name);
 				event.getProjectile().setMetadata("player", new FixedMetadataValue(plugin, player.getName()));
 				event.getProjectile().setMetadata("bow", new FixedMetadataValue(plugin, name));
+				
+				if (name.equals(Custom.IMP_FIRE_BOW)) {
+					event.getProjectile().setFireTicks(200);
+				}
 			}
 		}
 	}
@@ -70,6 +75,8 @@ public class ArcheryManager implements Listener{
 		if (bow.equals(Custom.IMP_COPPER_BOW)) {
 			int bowLevel = data.getCopperLevel();
 			dmg = Utils.getCopperBowDamage(bowLevel);
+		}else if (bow.equals(Custom.IMP_FIRE_BOW)) {
+			dmg = Utils.getFireBowDamage(data.getFireBowLevel());
 		}
 		return dmg;
 	}
@@ -83,9 +90,20 @@ public class ArcheryManager implements Listener{
 				data.setCopperXp(0);
 				data.setCopperLevel(data.getCopperLevel()+1);
 				Player p = Utils.getPlayer(player);
-				Custom.displayTitle(p, "Archery", "Level: "+data.getCopperLevel());
+				p.sendMessage(ChatColor.GREEN+bow+" level: "+data.getCopperLevel());
 			}else {
 				data.setCopperXp(xp);
+			}
+		}else if (bow.equals(Custom.IMP_FIRE_BOW)) {
+			int xp = data.getFireBowXp()+1;
+			float nextXp = Utils.getFireBowRequiredXp(data.getFireBowLevel());
+			if (xp >= nextXp) {
+				data.setFireBowXp(0);
+				data.setFireBowLevel(data.getFireBowLevel()+1);
+				Player p = Utils.getPlayer(player);
+				p.sendMessage(ChatColor.GREEN+bow+" level: "+data.getFireBowLevel());
+			}else {
+				data.setFireBowXp(xp);
 			}
 		}
 	}

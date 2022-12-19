@@ -40,6 +40,14 @@ public class Utils {
 		return (level * 1f) + 5;
 	}
 	
+	public static float getFireBowDamage(int level) {
+		return (level * 0.15f)+ 4;
+	}
+	
+	public static float getFireBowRequiredXp(int level) {
+		return (level * 1f) + 5;
+	}
+	
 	public static boolean isDetectable(Material type) {
 		return type == Material.DEEPSLATE_DIAMOND_ORE ||
 				type == Material.DEEPSLATE_IRON_ORE ||

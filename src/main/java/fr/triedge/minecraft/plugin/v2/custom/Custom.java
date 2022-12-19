@@ -26,6 +26,7 @@ public class Custom {
 	public static final String NUKE							= ChatColor.LIGHT_PURPLE+"NUKE";
 	public static final String ARROW						= ChatColor.LIGHT_PURPLE+"Fleche";
 	public static final String IMP_COPPER_BOW				= ChatColor.LIGHT_PURPLE+"Improved Copper Bow";
+	public static final String IMP_FIRE_BOW					= ChatColor.LIGHT_PURPLE+"Improved Fire Bow";
 	public static final String INVENTORY_POTION				= ChatColor.LIGHT_PURPLE+"Inventory Potion";
 	
 	public static final String BOSS_SKELETON_LVL				= ChatColor.RED+"BOSS Skeleton lvl";
@@ -118,8 +119,20 @@ public class Custom {
 		ItemStack bow = new ItemStack(Material.BOW);
 		ItemMeta meta = bow.getItemMeta();
 		ArrayList<String> lore = new ArrayList<>();
-		lore.add("500");
+		lore.add("Lance des fleches normales");
 		meta.setDisplayName(IMP_COPPER_BOW);
+		meta.setLore(lore);
+		meta.setUnbreakable(true);
+		bow.setItemMeta(meta);
+		return bow;
+	}
+	
+	public static ItemStack createImprovedFireBow() {
+		ItemStack bow = new ItemStack(Material.BOW);
+		ItemMeta meta = bow.getItemMeta();
+		ArrayList<String> lore = new ArrayList<>();
+		lore.add("Lance des fleches de feu");
+		meta.setDisplayName(IMP_FIRE_BOW);
 		meta.setLore(lore);
 		meta.setUnbreakable(true);
 		bow.setItemMeta(meta);
@@ -261,6 +274,15 @@ public class Custom {
 		ShapedRecipe recipe = new ShapedRecipe(key, createImprovedCopperBow());
 		recipe.shape(" DS","D S"," DS");
 		recipe.setIngredient('D', Material.COPPER_BLOCK);
+		recipe.setIngredient('S', Material.STRING);
+		return recipe;
+	}
+	
+	public static ShapedRecipe createImprovedFireBowRecipe(Plugin plugin) {
+		NamespacedKey key = new NamespacedKey(plugin, "jikai_fire_bow");
+		ShapedRecipe recipe = new ShapedRecipe(key, createImprovedFireBow());
+		recipe.shape(" DS","D S"," DS");
+		recipe.setIngredient('D', Material.BLAZE_ROD);
 		recipe.setIngredient('S', Material.STRING);
 		return recipe;
 	}
