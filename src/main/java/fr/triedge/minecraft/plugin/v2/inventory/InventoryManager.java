@@ -18,16 +18,16 @@ import org.bukkit.inventory.ItemStack;
 
 import com.google.gson.JsonIOException;
 
-import fr.triedge.minecraft.plugin.v2.MCPlugin19;
+import fr.triedge.minecraft.plugin.v2.MCPlugin20;
 import fr.triedge.minecraft.plugin.v2.exceptions.MCLoadingException;
 import fr.triedge.minecraft.plugin.v2.utils.Utils;
 
 public class InventoryManager implements Listener{
 
-	private MCPlugin19 plugin;
+	private MCPlugin20 plugin;
 	private HashMap<String, Inventory> internalInv = new HashMap<>();
 	
-	public InventoryManager(MCPlugin19 plugin) {
+	public InventoryManager(MCPlugin20 plugin) {
 		setPlugin(plugin);
 	}
 	
@@ -168,11 +168,11 @@ public class InventoryManager implements Listener{
 		}
 	}
 
-	public MCPlugin19 getPlugin() {
+	public MCPlugin20 getPlugin() {
 		return plugin;
 	}
 
-	public void setPlugin(MCPlugin19 plugin) {
+	public void setPlugin(MCPlugin20 plugin) {
 		this.plugin = plugin;
 	}
 

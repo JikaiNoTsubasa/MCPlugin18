@@ -14,7 +14,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 
 import com.google.gson.JsonIOException;
 
-import fr.triedge.minecraft.plugin.v2.MCPlugin19;
+import fr.triedge.minecraft.plugin.v2.MCPlugin20;
 import fr.triedge.minecraft.plugin.v2.custom.Custom;
 import fr.triedge.minecraft.plugin.v2.exceptions.MCLoadingException;
 import fr.triedge.minecraft.plugin.v2.utils.Utils;
@@ -22,10 +22,10 @@ import net.md_5.bungee.api.ChatColor;
 
 public class ArcheryManager implements Listener{
 	
-	private MCPlugin19 plugin;
+	private MCPlugin20 plugin;
 	private ArcheryDataList archeryDataList = new ArcheryDataList();
 	
-	public ArcheryManager(MCPlugin19 plugin) {
+	public ArcheryManager(MCPlugin20 plugin) {
 		setPlugin(plugin);
 	}
 
@@ -154,11 +154,11 @@ public class ArcheryManager implements Listener{
 		getPlugin().getLogger().log(Level.INFO,"ArcheryData stored");
 	}
 
-	public MCPlugin19 getPlugin() {
+	public MCPlugin20 getPlugin() {
 		return plugin;
 	}
 
-	public void setPlugin(MCPlugin19 plugin) {
+	public void setPlugin(MCPlugin20 plugin) {
 		this.plugin = plugin;
 	}
 

@@ -9,12 +9,12 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 
-import fr.triedge.minecraft.plugin.v2.MCPlugin19;
+import fr.triedge.minecraft.plugin.v2.MCPlugin20;
 import fr.triedge.minecraft.plugin.v2.utils.Utils;
 
 public class Detector {
 
-	public static void detect(Player player, MCPlugin19 plugin) {
+	public static void detect(Player player, MCPlugin20 plugin) {
 		ArrayList<Block> blocks = new ArrayList<>();
 		int maxDist = 20;
 		Block block = player.getLocation().getBlock().getRelative(BlockFace.DOWN);

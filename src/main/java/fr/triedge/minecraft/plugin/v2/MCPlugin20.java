@@ -89,14 +89,14 @@ import fr.triedge.minecraft.plugin.v2.warp.WarpManager;
  * @author steph
  *
  */
-public class MCPlugin19 extends JavaPlugin implements Listener{
+public class MCPlugin20 extends JavaPlugin implements Listener{
 
-	public static final String WARP_CONFIG_FILE								= "plugins/MCPlugin19/warp.json";
-	public static final String SPELL_CONFIG_FILE							= "plugins/MCPlugin19/magic.json";
-	public static final String ARCHERY_CONFIG_FILE							= "plugins/MCPlugin19/archery.json";
-	public static final String INV_CONFIG_FILE								= "plugins/MCPlugin19/inventory.json";
+	public static final String WARP_CONFIG_FILE								= "plugins/MCPlugin20/warp.json";
+	public static final String SPELL_CONFIG_FILE							= "plugins/MCPlugin20/magic.json";
+	public static final String ARCHERY_CONFIG_FILE							= "plugins/MCPlugin20/archery.json";
+	public static final String INV_CONFIG_FILE								= "plugins/MCPlugin20/inventory.json";
 	public static final String METRIC_INFO									= "metrics.info";
-	public static final String VERSION										= "20221219.0";
+	public static final String VERSION										= "20240816.0";
 	public static final String VERSION_SUB									= "Archery Master";
 
 	private WarpManager warpManager;

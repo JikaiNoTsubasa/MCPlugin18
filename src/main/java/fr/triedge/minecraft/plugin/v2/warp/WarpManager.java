@@ -23,16 +23,16 @@ import org.bukkit.util.Vector;
 
 import com.google.gson.JsonIOException;
 
-import fr.triedge.minecraft.plugin.v2.MCPlugin19;
+import fr.triedge.minecraft.plugin.v2.MCPlugin20;
 import fr.triedge.minecraft.plugin.v2.exceptions.MCLoadingException;
 import fr.triedge.minecraft.plugin.v2.utils.Utils;
 
 public class WarpManager implements Listener{
 
-	private MCPlugin19 plugin;
+	private MCPlugin20 plugin;
 	private WarpList warpList = new WarpList();
 
-	public WarpManager(MCPlugin19 plugin) {
+	public WarpManager(MCPlugin20 plugin) {
 		super();
 		this.setPlugin(plugin);
 	}
@@ -430,11 +430,11 @@ public class WarpManager implements Listener{
 		this.warpList = warpList;
 	}
 
-	public MCPlugin19 getPlugin() {
+	public MCPlugin20 getPlugin() {
 		return plugin;
 	}
 
-	public void setPlugin(MCPlugin19 plugin) {
+	public void setPlugin(MCPlugin20 plugin) {
 		this.plugin = plugin;
 	}
 }
