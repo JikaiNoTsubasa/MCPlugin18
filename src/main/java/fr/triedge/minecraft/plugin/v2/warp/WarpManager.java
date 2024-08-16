@@ -14,6 +14,7 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Sign;
+import org.bukkit.block.sign.SignSide;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -117,6 +118,35 @@ public class WarpManager implements Listener{
 	public void onPlayerInteract(PlayerInteractEvent event) {
 		if (event == null)
 			return;
+		
+		// Check that the player clicked a block
+		if(event.getAction() != Action.RIGHT_CLICK_BLOCK)
+		{
+			return;
+		}
+		
+		// Get clicked block from event
+        Block block = event.getClickedBlock();
+
+        // Check that the block is a sign
+        if (block == null || !(block.getState() instanceof Sign)) {
+            return;
+        }
+        
+        // Cast block to sign
+        Sign sign = (Sign) block.getState();
+       
+        //Get the side of the sign which was clicked
+        Player player = event.getPlayer();
+        SignSide side = sign.getTargetSide(event.getPlayer());
+        String[] lines = readSign(side);
+        if (lines != null) {
+			parseSign(lines[0], player);
+		}
+		
+		/*
+		if (event == null)
+			return;
 
 		// Right click block
 		if(event.getAction() == Action.RIGHT_CLICK_BLOCK)
@@ -132,9 +162,24 @@ public class WarpManager implements Listener{
 				}
 			}
 
+		}*/
+	}
+	
+	private String[] readSign(SignSide sign) {
+		String[] lines = sign.getLines();
+		if (lines.length != 0)
+			return lines;
+		return null;
+	}
+
+	private void parseSign(String line, Player player) {
+		String[] sp = line.split(":");
+		if (sp[0].equalsIgnoreCase("TP")) {
+			actionTP(sp[1],player);
 		}
 	}
 
+	/*
 	private String[] readSign(Block block) {
 		Sign sign = (Sign) block.getState();
 		String[] lines = sign.getLines();
@@ -148,7 +193,7 @@ public class WarpManager implements Listener{
 		if (sp[0].equalsIgnoreCase("TP")) {
 			actionTP(sp[1],player);
 		}
-	}
+	}*/
 
 	private void actionTP(String name, Player player) {
 		if (name == null || name == "") {
