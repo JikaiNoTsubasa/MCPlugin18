@@ -129,9 +129,11 @@ public class WarpManager implements Listener{
         Block block = event.getClickedBlock();
 
         // Check that the block is a sign
-        if (block == null || !(block.getState() instanceof Sign)) {
+        if (block == null || !isSignBlock(block.getType())) {
             return;
         }
+        
+        event.setCancelled(true);
         
         // Cast block to sign
         Sign sign = (Sign) block.getState();
@@ -164,6 +166,10 @@ public class WarpManager implements Listener{
 
 		}*/
 	}
+	
+	private boolean isSignBlock(Material material) {
+        return material.name().endsWith("_SIGN");
+    }
 	
 	private String[] readSign(SignSide sign) {
 		String[] lines = sign.getLines();
